@@ -1,0 +1,31 @@
+<html>
+<body>
+<table align="center" border = 1 width="400">
+<tr align="center">
+	<th>ID</th>
+	<th>OS Name</th>
+	<th>Company Name</th>
+	
+</tr>
+<h1 align="center">Data From DB</h1>
+{% for item in data %}
+<tr align="center">
+    <td>{{item[0]}}</td>
+    <td>{{item[1]}}</td>
+	<td>{{item[2]}}</td>
+    
+</tr>
+{% endfor %}  
+
+
+
+
+
+    
+</tr>
+ 
+  
+
+</table>
+</body>
+</html>
