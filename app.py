@@ -15,6 +15,7 @@ def machineinfo():
     host_ip = socket.gethostbyname(host_name)
     os_name = platform.system()
     return render_template("machineinfo.html", host_name=host_name, host_ip=host_ip, os_name=os_name)
+
 @app.route('/linuxos')
 
 def linuxos():
@@ -23,31 +24,16 @@ def linuxos():
     USER = os.getenv('USERNAME')
     PASSWORD = os.environ.get('PASSWORD')
     print(HOST,USER,PASSWORD)
-    conn=mysql.connector.connect(host=HOST,user=USER,passwd=PASSWORD);
-    curs=conn.cursor();
-	curs.executescript("""
-	use linuxos_db;
-
-	CREATE TABLE linuxos_tbl (
-		ID int,
-		OS varchar(255),
-		Company varchar(255)
-	);
-
-	insert into linuxos_tbl (ID, OS, Company) values (1,'centos','apple');
-
-   
-    INSERT INTO
-    linuxos_tbl(ID, OS, Company)
-    VALUES (
-        1,
-        'centos',
-        'apple'
-    );
-    """)
+    conn=mysql.connector.connect(host=HOST,user=USER,passwd=PASSWORD)
+    curs=conn.cursor()
+    curs.execute("CREATE DATABASE IF NOT EXISTS linuxos_db;")
+    curs.execute("USE linuxos_db;")
+    curs.execute("CREATE TABLE IF NOT EXISTS linuxos_tbl (ID int,OS varchar(255),Company varchar(255));")
+    curs.execute("INSERT INTO linuxos_tbl(ID, OS, Company) VALUES (1,'centos','apple');")
     query="select * from linuxos_tbl";
     curs.execute(query);
     data=curs.fetchall();
+    curs.close();
     print("Data Received")
     print(data)
     len1=len(data)
