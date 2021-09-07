@@ -1,4 +1,2 @@
 Flask
-mysql-connector-python
-flask_mysqldb
-	
+mysql-connector-python-rf
